@@ -84,10 +84,10 @@ This system simulates a production-grade fleet management backend where thousand
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                    Ingestion Gateway (grpc-go)                          │
 │                                                                         │
-│  ┌──────────────┐  ┌────────────┐  ┌──────────┐  ┌──────────────────┐ │
-│  │ OTel Tracing │→ │ Prometheus │→ │ Zap Logs │→ │ JWT Auth + Panic │ │
-│  │  Interceptor │  │  (grpcprom)│  │          │  │     Recovery     │ │
-│  └──────────────┘  └────────────┘  └──────────┘  └──────────────────┘ │
+│  ┌──────────────┐  ┌────────────┐  ┌──────────┐  ┌──────────────────┐   │
+│  │ OTel Tracing │→ │ Prometheus │→ │ Zap Logs │→ │ JWT Auth + Panic │   │
+│  │  Interceptor │  │  (grpcprom)│  │          │  │     Recovery     │   │
+│  └──────────────┘  └────────────┘  └──────────┘  └──────────────────┘   │
 │                                                                         │
 │            StreamTelemetry (bidirectional streaming RPC)                │
 │            SendAlert (server streaming RPC)                             │
@@ -100,8 +100,8 @@ This system simulates a production-grade fleet management backend where thousand
           └───────────────────────┘  └────────┬──────────────────────────┘
                                               │
                               ┌───────────────▼───────────────┐
-                              │   Cloud Dataflow (Apache Beam) │
-                              │   Windowed anomaly detection   │
+                              │   Cloud Dataflow (Apache Beam)│
+                              │   Windowed anomaly detection  │
                               └───────────────┬───────────────┘
                                               │
                               ┌───────────────▼───────────────┐
