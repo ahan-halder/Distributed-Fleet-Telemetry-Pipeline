@@ -1,0 +1,10 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+    - selector: fleet.telemetry.v1.TelemetryService.GetFleetStatus
+      get: "/v1/fleet/{fleet_id}/status"
+      additional_bindings:
+        - post: "/v1/fleet/status/batch"
+          body: "*"

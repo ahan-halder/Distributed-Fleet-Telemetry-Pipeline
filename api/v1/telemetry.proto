@@ -1,0 +1,106 @@
+syntax = "proto3";
+package fleet.telemetry.v1;
+
+import "google/api/annotations.proto";
+import "google/rpc/status.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/ahan-halder/fleet-telemetry/gen/go/fleet/telemetry/v1;telemetryv1";
+
+service TelemetryService {
+  // Bidirectional stream: agents push MetricFrames, gateway pushes StreamAck / alerts.
+  rpc StreamTelemetry(stream MetricFrame) returns (stream StreamResponse);
+
+  // Server streaming: push alert notifications to a registered agent.
+  rpc SubscribeAlerts(AlertSubscribeRequest) returns (stream AlertNotification);
+
+  // Unary: query the latest status of a fleet. Exposed as REST via grpc-gateway.
+  rpc GetFleetStatus(GetFleetStatusRequest) returns (GetFleetStatusResponse) {
+    option (google.api.http) = {
+      get: "/v1/fleet/{fleet_id}/status"
+      additional_bindings {
+        post: "/v1/fleet/status/batch"
+        body: "*"
+      }
+    };
+  }
+}
+
+message MetricFrame {
+  string agent_id       = 1;
+  string fleet_id       = 2;
+  google.protobuf.Timestamp collected_at = 3;
+  string idempotency_key = 4;  // UUID — server deduplicates on this key.
+
+  SystemMetrics  system  = 5;
+  NetworkMetrics network = 6;
+
+  map<string, string> labels = 7;  // Arbitrary key-value metadata (region, env, etc.)
+}
+
+message SystemMetrics {
+  double cpu_utilization_pct   = 1;  // 0.0 – 100.0
+  uint64 memory_used_bytes     = 2;
+  uint64 memory_total_bytes    = 3;
+  double disk_io_read_mbps     = 4;
+  double disk_io_write_mbps    = 5;
+}
+
+message NetworkMetrics {
+  double rx_mbps               = 1;
+  double tx_mbps               = 2;
+  uint64 tcp_retransmit_count  = 3;
+  uint64 connection_count      = 4;
+}
+
+message StreamResponse {
+  oneof response {
+    StreamAck          ack   = 1;
+    AlertNotification  alert = 2;
+  }
+}
+
+message StreamAck {
+  string idempotency_key = 1;
+  google.protobuf.Timestamp server_received_at = 2;
+}
+
+message AlertNotification {
+  string  alert_id     = 1;
+  string  agent_id     = 2;
+  string  fleet_id     = 3;
+  Severity severity    = 4;
+  string  message      = 5;
+  google.protobuf.Timestamp triggered_at = 6;
+
+  enum Severity {
+    SEVERITY_UNSPECIFIED = 0;
+    SEVERITY_INFO        = 1;
+    SEVERITY_WARNING     = 2;
+    SEVERITY_CRITICAL    = 3;
+  }
+}
+
+message AlertSubscribeRequest {
+  string agent_id  = 1;
+  string fleet_id  = 2;
+}
+
+message GetFleetStatusRequest {
+  string fleet_id    = 1;
+  uint32 last_n_rows = 2;  // How many recent frames to aggregate per agent.
+}
+
+message GetFleetStatusResponse {
+  string fleet_id                     = 1;
+  uint32 active_agent_count           = 2;
+  repeated AgentStatusSummary agents  = 3;
+  google.protobuf.Timestamp as_of     = 4;
+}
+
+message AgentStatusSummary {
+  string agent_id                      = 1;
+  double avg_cpu_utilization_pct       = 2;
+  uint64 last_seen_unix_ms             = 3;
+  AlertNotification.Severity status    = 4;
+}
