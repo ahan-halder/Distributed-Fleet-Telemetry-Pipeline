@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "gen/python"
+    ],
+    "python.autoComplete.extraPaths": [
+        "gen/python"
+    ]
+}

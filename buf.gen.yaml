@@ -14,3 +14,6 @@ plugins:
 
   - remote: buf.build/grpc-ecosystem/openapiv2
     out: gen/openapi
+
+  - remote: buf.build/protocolbuffers/python
+    out: gen/python

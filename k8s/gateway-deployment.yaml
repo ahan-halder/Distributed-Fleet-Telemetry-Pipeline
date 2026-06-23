@@ -22,6 +22,15 @@ spec:
         env:
         - name: MODE
           value: "gcp"
+        livenessProbe:
+          grpc:
+            port: 50051
+          initialDelaySeconds: 10
+        readinessProbe:
+          grpc:
+            port: 50051
+            service: fleet.telemetry.v1.TelemetryService
+          initialDelaySeconds: 5
 ---
 apiVersion: v1
 kind: Service

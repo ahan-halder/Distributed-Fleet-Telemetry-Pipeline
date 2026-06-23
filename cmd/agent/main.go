@@ -18,6 +18,8 @@ func main() {
 	gatewayAddr := flag.String("gateway", "localhost:50051", "Gateway address")
 	agentID := flag.String("agent-id", "agent-local-001", "Agent ID")
 	fleetID := flag.String("fleet-id", "fleet-dev", "Fleet ID")
+	rate := flag.Int("rate", 1, "Events per second to send")
+	anomalyProb := flag.Float64("anomaly-prob", 0.05, "Probability (0.0-1.0) of generating an anomaly")
 	flag.Parse()
 
 	// Connect to gateway
@@ -52,10 +54,12 @@ func main() {
 	}()
 
 	// Simulate sending frames
+	sleepDuration := time.Duration(1000 / *rate) * time.Millisecond
+	
 	for {
 		cpu := 40.0 + (float64(time.Now().UnixNano()%2000) / 100.0) // 40-60%
-		// Occasional anomaly
-		if time.Now().Unix()%10 == 0 {
+		// Occasional anomaly based on probability
+		if float64(time.Now().UnixNano()%100)/100.0 < *anomalyProb {
 			cpu = 95.0
 		}
 
@@ -75,6 +79,6 @@ func main() {
 			log.Fatalf("error sending frame: %v", err)
 		}
 		
-		time.Sleep(1 * time.Second)
+		time.Sleep(sleepDuration)
 	}
 }

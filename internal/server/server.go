@@ -11,6 +11,8 @@ import (
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/health"
+	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/status"
 )
 
@@ -19,7 +21,7 @@ type Config struct {
 }
 
 // NewServer creates a new gRPC server with the complete interceptor chain.
-func NewServer(cfg *Config) *grpc.Server {
+func NewServer(cfg *Config) (*grpc.Server, *health.Server) {
 	metrics := observability.NewServerMetrics()
 
 	panicRecovery := func(p any) (err error) {
@@ -31,7 +33,7 @@ func NewServer(cfg *Config) *grpc.Server {
 		return status.Errorf(codes.Internal, "internal server error")
 	}
 
-	return grpc.NewServer(
+	grpcServer := grpc.NewServer(
 		grpc.StatsHandler(otelgrpc.NewServerHandler()), // OTel via StatsHandler (preferred over interceptor).
 		grpc.ChainUnaryInterceptor(
 			metrics.UnaryServerInterceptor(),
@@ -46,4 +48,9 @@ func NewServer(cfg *Config) *grpc.Server {
 			recovery.StreamServerInterceptor(recovery.WithRecoveryHandler(panicRecovery)),
 		),
 	)
+
+	healthServer := health.NewServer()
+	healthpb.RegisterHealthServer(grpcServer, healthServer)
+
+	return grpcServer, healthServer
 }

@@ -12,6 +12,7 @@ import (
 	"github.com/ahan-halder/fleet-telemetry/internal/anomaly"
 	"github.com/ahan-halder/fleet-telemetry/internal/server"
 	telemetryv1 "github.com/ahan-halder/fleet-telemetry/gen/go/fleet/telemetry/v1"
+	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 
 func main() {
@@ -25,8 +26,12 @@ func main() {
 	// For local mode, we pass nil for Bigtable and Pub/Sub
 	telemetryServer := server.NewTelemetryServer(nil, nil, detector)
 
-	grpcServer := server.NewServer(&server.Config{})
+	grpcServer, healthServer := server.NewServer(&server.Config{})
 	telemetryv1.RegisterTelemetryServiceServer(grpcServer, telemetryServer)
+	
+	// Mark the service as SERVING
+	healthServer.SetServingStatus("", healthpb.HealthCheckResponse_SERVING)
+	healthServer.SetServingStatus("fleet.telemetry.v1.TelemetryService", healthpb.HealthCheckResponse_SERVING)
 
 	lis, err := net.Listen("tcp", ":"+*port)
 	if err != nil {
