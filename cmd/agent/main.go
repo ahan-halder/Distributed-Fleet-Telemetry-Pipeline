@@ -53,14 +53,20 @@ func main() {
 
 	// Simulate sending frames
 	for {
+		cpu := 40.0 + (float64(time.Now().UnixNano()%2000) / 100.0) // 40-60%
+		// Occasional anomaly
+		if time.Now().Unix()%10 == 0 {
+			cpu = 95.0
+		}
+
 		frame := &telemetryv1.MetricFrame{
 			AgentId:        *agentID,
 			FleetId:        *fleetID,
 			CollectedAt:    timestamppb.Now(),
 			IdempotencyKey: uuid.New().String(),
 			System: &telemetryv1.SystemMetrics{
-				CpuUtilizationPct: 45.0,
-				MemoryUsedBytes:   2048,
+				CpuUtilizationPct: cpu,
+				MemoryUsedBytes:   uint64(2048 + time.Now().UnixNano()%1024),
 				MemoryTotalBytes:  8192,
 			},
 		}

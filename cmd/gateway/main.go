@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/ahan-halder/fleet-telemetry/internal/anomaly"
 	"github.com/ahan-halder/fleet-telemetry/internal/server"
@@ -45,6 +46,20 @@ func main() {
 	<-c
 	
 	log.Println("Shutting down gateway...")
-	grpcServer.GracefulStop()
-	log.Println("Gateway stopped gracefully")
+	// Create a timeout for graceful shutdown
+	stopped := make(chan struct{})
+	go func() {
+		grpcServer.GracefulStop()
+		close(stopped)
+	}()
+
+	t := time.NewTimer(10 * time.Second)
+	select {
+	case <-t.C:
+		log.Println("Shutdown timeout exceeded, forcing stop")
+		grpcServer.Stop()
+	case <-stopped:
+		t.Stop()
+		log.Println("Gateway stopped gracefully")
+	}
 }

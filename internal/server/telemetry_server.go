@@ -24,8 +24,25 @@ type Deduplicator struct {
 }
 
 func NewDeduplicator() *Deduplicator {
-	return &Deduplicator{
+	d := &Deduplicator{
 		seen: make(map[string]time.Time),
+	}
+	// Start background cleanup
+	go d.cleanupLoop()
+	return d
+}
+
+func (d *Deduplicator) cleanupLoop() {
+	ticker := time.NewTicker(5 * time.Minute)
+	for range ticker.C {
+		d.mu.Lock()
+		now := time.Now()
+		for k, v := range d.seen {
+			if now.Sub(v) > 10*time.Minute {
+				delete(d.seen, k)
+			}
+		}
+		d.mu.Unlock()
 	}
 }
 
@@ -36,7 +53,6 @@ func (d *Deduplicator) Seen(ctx context.Context, key string) bool {
 		return true
 	}
 	d.seen[key] = time.Now()
-	// Cleanup should be done periodically in a real implementation
 	return false
 }
 
