@@ -3,13 +3,18 @@ import logging
 import sys
 import os
 
+# pyrefly: ignore [missing-import]
 import apache_beam as beam
+# pyrefly: ignore [missing-import]
 from apache_beam.options.pipeline_options import PipelineOptions
+# pyrefly: ignore [missing-import]
 from apache_beam.options.pipeline_options import StandardOptions
+# pyrefly: ignore [missing-import]
 from apache_beam.transforms.window import FixedWindows
 
 # Add the generated python directory to the path to import telemetry_pb2
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'gen', 'python'))
+# pyrefly: ignore [missing-import]
 from v1 import telemetry_pb2
 
 class ParseMessage(beam.DoFn):
