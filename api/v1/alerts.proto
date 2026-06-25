@@ -1,0 +1,26 @@
+syntax = "proto3";
+package fleet.telemetry.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "v1/telemetry.proto";
+
+option go_package = "github.com/ahan-halder/fleet-telemetry/gen/go/fleet/telemetry/v1;telemetryv1";
+
+// AlertPolicy defines dynamic anomaly detection rules for edge agents.
+message AlertPolicy {
+  string policy_id = 1;
+  string fleet_id  = 2;
+  double cpu_threshold_pct = 3;
+  double memory_threshold_pct = 4;
+  bool enabled = 5;
+}
+
+message ListAlertHistoryRequest {
+  string fleet_id = 1;
+  uint32 limit    = 2;
+}
+
+message ListAlertHistoryResponse {
+  repeated AlertNotification alerts = 1;
+}

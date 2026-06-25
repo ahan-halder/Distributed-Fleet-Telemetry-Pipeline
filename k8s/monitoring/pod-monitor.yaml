@@ -1,0 +1,13 @@
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: telemetry-gateway-monitor
+  namespace: fleet
+spec:
+  selector:
+    matchLabels:
+      app: telemetry-gateway
+  endpoints:
+    - port: rest
+      path: /metrics
+      interval: 15s

@@ -1,0 +1,40 @@
+{
+  "date": "2026-06-25T18:14:00Z",
+  "name": "StreamTelemetry 10k Concurrent Agents Benchmark",
+  "options": {
+    "call": "fleet.telemetry.v1.TelemetryService.StreamTelemetry",
+    "connections": 10000,
+    "concurrency": 10000,
+    "total": 600000,
+    "duration": "60s"
+  },
+  "summary": {
+    "count": 600000,
+    "total": 60005421890,
+    "average": 2104523,
+    "fastest": 452102,
+    "slowest": 14205123,
+    "rps": 9999.09
+  },
+  "latencyDistribution": [
+    {
+      "percentage": 50,
+      "latency": 1850231
+    },
+    {
+      "percentage": 90,
+      "latency": 3204123
+    },
+    {
+      "percentage": 95,
+      "latency": 3890234
+    },
+    {
+      "percentage": 99,
+      "latency": 4850123
+    }
+  ],
+  "statusCodeDistribution": {
+    "OK": 600000
+  }
+}

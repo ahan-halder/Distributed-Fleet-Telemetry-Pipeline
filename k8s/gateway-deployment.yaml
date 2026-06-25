@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: telemetry-gateway
-  labels:
-    app: telemetry-gateway
+  namespace: fleet
+  annotations:
+    linkerd.io/inject: enabled
 spec:
   replicas: 3
   selector:
@@ -15,32 +16,37 @@ spec:
         app: telemetry-gateway
     spec:
       containers:
-      - name: gateway
-        image: gcr.io/your-project/telemetry-gateway:latest
-        ports:
-        - containerPort: 50051
-        env:
-        - name: MODE
-          value: "gcp"
-        livenessProbe:
-          grpc:
-            port: 50051
-          initialDelaySeconds: 10
-        readinessProbe:
-          grpc:
-            port: 50051
-            service: fleet.telemetry.v1.TelemetryService
-          initialDelaySeconds: 5
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: telemetry-gateway
-spec:
-  type: LoadBalancer
-  selector:
-    app: telemetry-gateway
-  ports:
-    - protocol: TCP
-      port: 50051
-      targetPort: 50051
+        - name: gateway
+          image: gcr.io/your-project/telemetry-gateway:latest
+          ports:
+            - containerPort: 50051
+              name: grpc
+            - containerPort: 8080
+              name: rest
+          env:
+            - name: BIGTABLE_PROJECT
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-config
+                  key: project_id
+            - name: BIGTABLE_INSTANCE
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-config
+                  key: bigtable_instance
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "256Mi"
+            limits:
+              cpu: "2"
+              memory: "1Gi"
+          livenessProbe:
+            grpc:
+              port: 50051
+            initialDelaySeconds: 10
+          readinessProbe:
+            grpc:
+              port: 50051
+              service: fleet.telemetry.v1.TelemetryService
+            initialDelaySeconds: 5

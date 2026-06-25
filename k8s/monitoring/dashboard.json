@@ -1,0 +1,41 @@
+{
+  "displayName": "Distributed Fleet Telemetry Pipeline",
+  "mosaicLayout": {
+    "columns": 12,
+    "tiles": [
+      {
+        "width": 6,
+        "height": 4,
+        "widget": {
+          "title": "Ingestion Latency (p99)",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "histogram_quantile(0.99, sum(rate(grpc_server_handling_seconds_bucket[1m])) by (le))"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "xPos": 6,
+        "width": 6,
+        "height": 4,
+        "widget": {
+          "title": "Active Agent Streams",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "prometheusQuery": "sum(grpc_server_started_total) - sum(grpc_server_handled_total)"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
