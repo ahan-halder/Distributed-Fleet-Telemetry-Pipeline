@@ -5,6 +5,10 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
@@ -31,8 +35,29 @@ func main() {
 		log.Fatalf("failed to start HTTP gateway: %v", err)
 	}
 
-	log.Printf("Starting HTTP/REST proxy on port %s", *port)
-	if err := http.ListenAndServe(":"+*port, mux); err != nil {
-		log.Fatalf("failed to serve HTTP: %v", err)
+	srv := &http.Server{
+		Addr:    ":" + *port,
+		Handler: mux,
+	}
+
+	go func() {
+		log.Printf("Starting HTTP/REST proxy on port %s", *port)
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("failed to serve HTTP: %v", err)
+		}
+	}()
+
+	// Wait for interrupt signal to gracefully shutdown the server
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	<-c
+
+	log.Println("Shutting down REST proxy...")
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer shutdownCancel()
+	if err := srv.Shutdown(shutdownCtx); err != nil {
+		log.Printf("REST proxy shutdown error: %v", err)
+	} else {
+		log.Println("REST proxy stopped gracefully")
 	}
 }

@@ -145,7 +145,7 @@ import "google/api/annotations.proto";
 import "google/rpc/status.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/yourhandle/fleet-telemetry/gen/go/fleet/telemetry/v1;telemetryv1";
+option go_package = "github.com/ahan-halder/fleet-telemetry/gen/go/fleet/telemetry/v1;telemetryv1";
 
 service TelemetryService {
   // Bidirectional stream: agents push MetricFrames, gateway pushes StreamAck / alerts.
@@ -769,7 +769,7 @@ fleet-telemetry/
 
 **1. Clone and generate proto stubs:**
 ```bash
-git clone https://github.com/yourhandle/fleet-telemetry
+git clone https://github.com/ahan-halder/fleet-telemetry
 cd fleet-telemetry
 
 # Lint and generate Go stubs from .proto files.
@@ -902,7 +902,7 @@ All `.proto` files are governed by **Buf CLI**. The configuration enforces that 
 version: v2
 modules:
   - path: api
-    name: buf.build/yourhandle/fleet-telemetry
+    name: buf.build/ahan-halder/fleet-telemetry
 
 lint:
   use:
@@ -914,7 +914,7 @@ breaking:
   use:
     - FILE
   against:
-    - buf.build/yourhandle/fleet-telemetry:main  # Check against the BSR main branch.
+    - buf.build/ahan-halder/fleet-telemetry:main  # Check against the BSR main branch.
 
 deps:
   - buf.build/googleapis/googleapis             # For google.api.http and errdetails.
@@ -955,7 +955,7 @@ jobs:
         with:
           version: '1.34.0'
       - run: buf lint
-      - run: buf breaking --against 'https://github.com/yourhandle/fleet-telemetry.git#branch=main'
+      - run: buf breaking --against 'https://github.com/ahan-halder/fleet-telemetry.git#branch=main'
 ```
 
 **Breaking change policy:** The following changes are blocked by `buf breaking` before merge:
@@ -1139,7 +1139,6 @@ The request currently contains only `agent_id` and `fleet_id`, which might tempt
 - **Agent certificate rotation:** Replace static JWT with short-lived mTLS certificates issued via Certificate Authority Service — agents rotate credentials without restart.
 - **Schema versioning:** Promote the API to `fleet.telemetry.v2` with a parallel deployment strategy, keeping v1 running during the migration window.
 - **Anomaly ML model:** Replace threshold-based detection with a Vertex AI online prediction endpoint (gRPC-backed) for time-series anomaly scoring.
-- **gRPC health checking:** Implement the standard `grpc.health.v1.Health` service so GKE readiness probes and Linkerd health checks use the native gRPC protocol rather than HTTP.
 
 ## Implementation Results
 
@@ -1149,13 +1148,7 @@ The following improvements and implementation goals have been successfully compl
 3. **Robust Interceptor Chain**: Integrated OpenTelemetry tracing, Prometheus metrics, Zap structured logging, JWT authentication, and panic recovery using the latest `grpc-ecosystem/go-grpc-middleware/v2`.
 4. **Data Sinks**: Built integrations for both Google Cloud Bigtable (with reverse-chronological row keys) and Cloud Pub/Sub.
 5. **Agent Simulation**: Implemented a mock agent capable of generating randomized telemetry loads with occasional anomalies for realistic testing.
-6. **Graceful Shutdown & Memory Management**: Implemented periodic cleanup routines for deduplicators to prevent memory leaks and added graceful shutdown timeouts to the gateway server.
+6. **Graceful Shutdown & Memory Management**: Implemented periodic cleanup routines for both `Deduplicator` and `fleetAgents` map to prevent memory leaks, and added graceful shutdown timeouts to both the gateway and REST proxy servers.
 7. **Infrastructure**: Created Dockerfiles and Kubernetes manifests ready for GKE Autopilot deployment, alongside Terraform modules for GCP resource provisioning.
 
 All Go binaries (`gateway`, `agent`, `rest-proxy`) compile successfully with no linting or syntax errors.
-
----
-
-## License
-
-Apache 2.0. See [LICENSE](LICENSE).

@@ -86,7 +86,7 @@ type muSub struct {
 }
 
 func NewTelemetryServer(bt *bigtable.Client, ps *pubsub.Publisher, detector anomaly.Detector) *TelemetryServer {
-	return &TelemetryServer{
+	s := &TelemetryServer{
 		bigtable:        bt,
 		pubsub:          ps,
 		anomalyDetector: detector,
@@ -95,6 +95,28 @@ func NewTelemetryServer(bt *bigtable.Client, ps *pubsub.Publisher, detector anom
 			subs: make(map[string]chan *telemetryv1.AlertNotification),
 		},
 		fleetAgents: make(map[string]map[string]agentState),
+	}
+	go s.cleanupLoop()
+	return s
+}
+
+func (s *TelemetryServer) cleanupLoop() {
+	ticker := time.NewTicker(10 * time.Minute)
+	for range ticker.C {
+		s.muFleet.Lock()
+		nowMs := uint64(time.Now().UnixMilli())
+		for fleetID, agents := range s.fleetAgents {
+			for agentID, state := range agents {
+				// Evict if not seen for more than 1 hour (3600000 ms)
+				if nowMs > state.lastSeenMs && (nowMs-state.lastSeenMs) > 3600000 {
+					delete(agents, agentID)
+				}
+			}
+			if len(agents) == 0 {
+				delete(s.fleetAgents, fleetID)
+			}
+		}
+		s.muFleet.Unlock()
 	}
 }
 
