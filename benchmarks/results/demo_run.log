@@ -1,0 +1,152 @@
+[demo] Building binaries...
+[demo] Starting gateway on :50051
+2026/09/01 03:50:02 Starting gateway in local mode on port 50051
+2026/09/01 03:50:02 failed to listen: listen tcp :50051: bind: address already in use
+[demo] Starting REST proxy on :8080
+2026/09/01 03:50:03 Dialing gRPC server at localhost:50051
+2026/09/01 03:50:03 Starting HTTP/REST proxy on port 8080
+[demo] Starting 5 simulated agents (fleet=fleet-demo)
+[demo] Streaming telemetry for 12s...
+2026/09/01 03:50:04 Received ack for e918165e-813b-40cf-b3cf-47dd8d83e0da
+2026/09/01 03:50:04 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:04 Received ack for e802e7fc-abb1-4f3d-9a4d-ea199d14ff33
+2026/09/01 03:50:04 Received ack for 68b5cb3d-d400-4cdc-8f73-a96488da6dfc
+2026/09/01 03:50:04 Received ack for 72658e29-7787-4d0c-b10c-d98ea9ac9ade
+2026/09/01 03:50:04 Received ack for d2ba31ee-353e-4853-a9de-420e3aa19615
+2026/09/01 03:50:04 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:04 Received ack for fffa6962-98fc-4b11-a4af-4e222ee2670d
+2026/09/01 03:50:04 Received ack for ec13749f-2392-467e-aa65-598f4963d0d0
+2026/09/01 03:50:04 Received ack for 4ce8eaee-dae8-4a27-8ec2-8ac01fad4268
+2026/09/01 03:50:04 Received ack for 6e5c60eb-b261-41c3-b25b-139f9164ef91
+2026/09/01 03:50:04 Received ack for c50375a3-af1d-4e87-a285-dd21cbc40a43
+2026/09/01 03:50:05 Received ack for 3a4ec322-fb63-4bfd-bc89-5a535341ce0e
+2026/09/01 03:50:05 Received ack for 82b0af46-00e6-40b0-8496-440de63805a9
+2026/09/01 03:50:05 Received ack for 3e2d406c-a101-44b5-b310-e820d8e92b78
+2026/09/01 03:50:05 Received ack for dbf57017-1e57-4f59-9cc9-01002b57e1dd
+2026/09/01 03:50:05 Received ack for ea05dc68-86ba-4cfa-b73c-2cf2cacbd95e
+2026/09/01 03:50:05 Received ack for af2da629-2ea3-41c9-a6fd-9abc51d5ea73
+2026/09/01 03:50:05 Received ack for 806a43d9-07c2-478e-8ff4-2012d42668d2
+2026/09/01 03:50:05 Received ack for f0c7bdb7-ac17-43d7-9df3-247f5f44e01f
+2026/09/01 03:50:05 Received ack for b61d8d46-bae5-4a8a-b32b-faaabbd841ec
+2026/09/01 03:50:05 Received ack for 869bb640-24f6-499c-bf7d-209d6d2e1164
+2026/09/01 03:50:06 Received ack for 83e47a4c-241e-4904-b30d-8b4a38889999
+2026/09/01 03:50:06 Received ack for c239ea09-2b0c-4337-816e-b9566106e8a2
+2026/09/01 03:50:06 Received ack for 40b3039b-5c53-4739-853e-400ac29644b1
+2026/09/01 03:50:06 Received ack for 9cca07c6-ec8f-470e-b64a-baef0b45e477
+2026/09/01 03:50:06 Received ack for 09c65b45-f742-4df1-8366-f97f3dfe0358
+2026/09/01 03:50:06 Received ack for c58615c6-cea3-47f8-8ea5-94eeb641b73d
+2026/09/01 03:50:06 Received ack for 0ac1bbb7-d5f5-4596-9edf-d777d728cd03
+2026/09/01 03:50:06 Received ack for df94eecc-fa46-4669-833a-093d20f779bf
+2026/09/01 03:50:06 Received ack for 171677bc-6032-4784-8ae3-df58fc346185
+2026/09/01 03:50:06 Received ack for 24cf404a-c295-4ed0-9a74-34e0b6e57b02
+2026/09/01 03:50:07 Received ack for 8801aa6b-229d-4bf9-ac32-22b82c098911
+2026/09/01 03:50:07 Received ack for 77c45b1c-659c-43a6-aac3-c16b3cf091c7
+2026/09/01 03:50:07 Received ack for f2c868fd-8aa1-49cc-a45c-ceb8394bdad0
+2026/09/01 03:50:07 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:07 Received ack for 8869755e-ba69-4980-97e1-d817292c9bde
+2026/09/01 03:50:07 Received ack for 0d585bad-8f46-4562-8ff6-79bb1e60414e
+2026/09/01 03:50:07 Received ack for 12db73ee-0983-464f-b5c0-a44547f23a65
+2026/09/01 03:50:07 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:07 Received ack for 466e1786-2c1a-44af-a954-b69ed6389723
+2026/09/01 03:50:07 Received ack for 46009ba5-7839-4fad-bdf5-5c540ad56d50
+2026/09/01 03:50:07 Received ack for a384d6ee-123e-4852-8399-60e1fa88c7e2
+2026/09/01 03:50:07 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:07 Received ack for 41e0183c-5138-438c-825f-455ce2543658
+2026/09/01 03:50:08 Received ack for dea84525-61cf-4df1-89c8-0cc3b93408b0
+2026/09/01 03:50:08 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:08 Received ack for f0e16bac-8668-4058-b561-9e82f05f8199
+2026/09/01 03:50:08 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:08 Received ack for 928807df-506d-432c-a3d0-dd59e3aa207a
+2026/09/01 03:50:08 Received ack for 7990134b-4be0-4d4b-b9f1-655ceb67d135
+2026/09/01 03:50:08 Received ack for e7325110-cc85-49a1-814e-2cff0e95cb5a
+2026/09/01 03:50:08 Received ack for f6bc9d9d-41a2-4dd0-9f2d-96b01639f314
+2026/09/01 03:50:08 Received ack for b0c851fa-894b-4db9-9d31-4a4a49d0e493
+2026/09/01 03:50:08 Received ack for 38b3b04a-2983-425f-9363-672347507fb7
+2026/09/01 03:50:08 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:08 Received ack for c8800c35-f4f6-4487-a8a5-23e3b42ed7a3
+2026/09/01 03:50:08 Received ack for 50f507ac-bc16-42fc-b140-8ae6016e3d43
+2026/09/01 03:50:09 Received ack for ef09ffc1-69d8-43a0-b9a4-d363692ced21
+2026/09/01 03:50:09 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:09 Received ack for d560da2d-b1dd-4d07-9b61-4a14d48b8fa0
+2026/09/01 03:50:09 Received ack for 155d18b4-6249-460c-954d-bdee9fc47f3d
+2026/09/01 03:50:09 Received ack for b7596ee5-baa1-4c20-bc4c-08a411c072bb
+2026/09/01 03:50:09 Received ack for c9dc3b02-b01a-475b-8d2c-219680c4b4e1
+2026/09/01 03:50:09 Received ack for 3507b635-a3b7-421e-80c0-62cba92d54ec
+2026/09/01 03:50:09 Received ack for a83448e6-8f6f-41b2-84bb-d5a3c0a2de80
+2026/09/01 03:50:09 Received ack for f3bb71b0-db75-43cf-8f11-b8212bf1d192
+2026/09/01 03:50:09 Received ack for 0bb468d5-f3d2-4cd0-b6db-59838e308144
+2026/09/01 03:50:09 Received ack for d8790064-3c26-48ac-9ab0-8dfae1257b0d
+2026/09/01 03:50:10 Received ack for 63b938fa-9f5d-45e5-b7f8-f4fa34ea421d
+2026/09/01 03:50:10 Received ack for bb7d6126-4196-4538-ae92-d660d1afc158
+2026/09/01 03:50:10 Received ack for 2a1ce887-34c1-4213-b243-c5dba4961398
+2026/09/01 03:50:10 Received ack for 35360141-59f2-42a4-8852-5116a4914b85
+2026/09/01 03:50:10 Received ack for 95156040-8075-4f5e-ad73-0f186cf9d3ff
+2026/09/01 03:50:10 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:10 Received ack for 25ca8b45-3d1b-4958-a0e9-f3aa211a1d19
+2026/09/01 03:50:10 Received ack for 87d814c8-bf5b-4bb5-b301-2c33577d92cf
+2026/09/01 03:50:10 Received ack for 3b500440-49ef-4dac-8594-f54538c6918e
+2026/09/01 03:50:10 Received ack for 9fd2f265-18c4-423c-9950-8f9cb7232904
+2026/09/01 03:50:10 Received ack for ec2a27ac-266b-459a-acba-c52dbd3dae7a
+2026/09/01 03:50:11 Received ack for 7ecb8206-6eeb-4557-94f4-ac2e191117a6
+2026/09/01 03:50:11 Received ack for 03b9270d-96b5-4ca4-a71b-0799194d8324
+2026/09/01 03:50:11 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:11 Received ack for 056b81bc-170a-4ab9-b54d-704ebbaf9f0e
+2026/09/01 03:50:11 Received ack for 6d978a64-1021-4988-9b0f-6a597eefba1b
+2026/09/01 03:50:11 Received ack for 4c1a626e-b34e-46bf-be3c-460791f53004
+2026/09/01 03:50:11 Received ack for 3f808fdb-3167-453c-b541-da0416ee2364
+2026/09/01 03:50:11 Received ack for 95cd772e-5c95-49ec-a78e-a253d214b26e
+2026/09/01 03:50:11 Received ack for c16e09f8-38c3-4a8c-a2fa-8d57d1c30a3e
+2026/09/01 03:50:11 Received ack for 3d3ae1f9-59bc-4e9c-9c4e-7f82c3bd499a
+2026/09/01 03:50:11 Received ack for 70252543-08ea-4562-8b24-3dc024985191
+2026/09/01 03:50:12 Received ack for 79ece8f6-ae02-4aa6-a6b5-2d34b379b577
+2026/09/01 03:50:12 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:12 Received ack for e373fd9f-aca4-444a-9089-8a06c3968ac4
+2026/09/01 03:50:12 Received ack for 6c442c8b-c781-4695-8325-68f6f2e16dea
+2026/09/01 03:50:12 Received ack for 8a0aceee-325f-441b-88ec-80035daeff8b
+2026/09/01 03:50:12 Received ack for 37b2f9ad-c695-427d-9545-adfaaae5e2e5
+2026/09/01 03:50:12 Received ack for 253a241f-f8e1-4a6e-bf5b-5620b88ba3db
+2026/09/01 03:50:12 Received ack for eca29485-5b67-4bc5-8058-503499c9e87b
+2026/09/01 03:50:12 Received ack for 3e19768c-5272-41d8-a77f-7753e687d84e
+2026/09/01 03:50:12 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:12 Received ack for 77eade63-2b52-4cb3-8885-f1c6813ac484
+2026/09/01 03:50:12 Received ack for ccdaf3c3-446e-48ac-9c28-083d7a2d534c
+2026/09/01 03:50:13 Received ack for 50c2878b-3819-49cb-a492-23a8b0604b07
+2026/09/01 03:50:13 Received ack for f8001af3-2538-4316-8d8b-85b557b418ba
+2026/09/01 03:50:13 Received ack for 57473685-9032-4c90-813e-5789b5c36527
+2026/09/01 03:50:13 Received ack for 9b0a4ff8-2b5e-4d55-ae1b-a76e99e69e86
+2026/09/01 03:50:13 Received ack for 08d90f0a-c24f-46ca-a6a7-e7a845b6fcbc
+2026/09/01 03:50:13 Received ack for 6a8f6b99-7fa9-4029-b2a8-deab96ed3e4f
+2026/09/01 03:50:13 Received ack for 3f74bcb0-54bd-42c5-b9dc-a7b5d70e5e85
+2026/09/01 03:50:13 Received ack for 01b8dd21-b305-4870-b3b4-16b5104cd43c
+2026/09/01 03:50:13 Received ack for bebf3a9a-aeb1-486d-96d9-765848db430b
+2026/09/01 03:50:13 Received ack for 5cb4551e-ccdf-40aa-9a38-d81792f819bc
+2026/09/01 03:50:14 Received ack for bb41c7d2-b12a-4e9b-9ba7-5f1d12717f49
+2026/09/01 03:50:14 Received ack for 3405dcf9-9c26-41d8-a449-f916d4530b12
+2026/09/01 03:50:14 Received ack for 483f66a7-fc11-4efc-8431-bf5cfa3d4067
+2026/09/01 03:50:14 Received ack for 21995e73-5985-4a4b-ad1e-5c13cf06ab01
+2026/09/01 03:50:14 Received alert! SEVERITY_CRITICAL: Anomaly detected: metric threshold exceeded
+2026/09/01 03:50:14 Received ack for f9cfa2f6-88da-4440-bc1b-fa73d1a2873e
+2026/09/01 03:50:14 Received ack for fa977fde-9350-4715-bbfd-f213e59e5320
+2026/09/01 03:50:14 Received ack for df0eef81-e3ae-4d3f-9808-276dae3fe43e
+2026/09/01 03:50:14 Received ack for 627d3748-24d5-431a-b039-9abcb50fc8f7
+2026/09/01 03:50:14 Received ack for 70c67156-45b9-4bca-8ef2-92df23ed0bfc
+2026/09/01 03:50:14 Received ack for 8b41664e-de40-49db-acd6-1cc5c0c06d82
+2026/09/01 03:50:15 Received ack for 0f085533-606a-4bb2-a40c-7929739a7edd
+2026/09/01 03:50:15 Received ack for 2147a5f7-d44d-492c-9ed7-79533088c624
+2026/09/01 03:50:15 Received ack for a588be36-f730-46d5-93ba-ab0a87fb36ad
+2026/09/01 03:50:15 Received ack for daf5ef19-6716-4539-ab17-ad61834395e3
+2026/09/01 03:50:15 Received ack for ddc42d32-418d-4d46-ba08-fc5e53bb8e7b
+2026/09/01 03:50:15 Received ack for a9a7db33-f71b-44c4-9ce3-3fec85bb374b
+2026/09/01 03:50:15 Received ack for 36994a27-7110-4bb5-8d8f-44b2f5ff1e5f
+2026/09/01 03:50:15 Received ack for 65cce4f8-8cbb-4128-be42-5b0d9a2b0eed
+2026/09/01 03:50:15 Received ack for c2a071da-c158-4a27-b4d2-1df6376920ef
+2026/09/01 03:50:15 Received ack for 5b752b17-4325-4267-9b5e-9d1e609eb1ad
+[demo] Querying fleet status via REST...
+{"fleetId":"fleet-demo","activeAgentCount":5,"agents":[{"agentId":"agent-demo-001","avgCpuUtilizationPct":57.489999999999995,"lastSeenUnixMs":"1788234615790","status":"SEVERITY_INFO"},{"agentId":"agent-demo-002","avgCpuUtilizationPct":54.21,"lastSeenUnixMs":"1788234615790","status":"SEVERITY_INFO"},{"agentId":"agent-demo-004","avgCpuUtilizationPct":46.19,"lastSeenUnixMs":"1788234615790","status":"SEVERITY_INFO"},{"agentId":"agent-demo-005","avgCpuUtilizationPct":50.59,"lastSeenUnixMs":"1788234615790","status":"SEVERITY_INFO"},{"agentId":"agent-demo-003","avgCpuUtilizationPct":59.69,"lastSeenUnixMs":"1788234615790","status":"SEVERITY_INFO"}],"asOf":"2026-09-01T03:50:16.278671420Z"}
+[demo] Demo summary:
+[demo]   Active agents reported: 5
+[demo]   Alert notifications received: 14
+[demo]   Full log: /workspace/benchmarks/results/demo_run.log
+[demo] Stopping demo processes...
+2026/09/01 03:50:16 Shutting down REST proxy...
+2026/09/01 03:50:16 REST proxy stopped gracefully

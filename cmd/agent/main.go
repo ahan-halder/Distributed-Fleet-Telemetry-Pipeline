@@ -5,10 +5,11 @@ import (
 	"flag"
 	"log"
 	"time"
-	
+
 	"github.com/google/uuid"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	telemetryv1 "github.com/ahan-halder/fleet-telemetry/gen/go/fleet/telemetry/v1"
@@ -20,6 +21,7 @@ func main() {
 	fleetID := flag.String("fleet-id", "fleet-dev", "Fleet ID")
 	rate := flag.Int("rate", 1, "Events per second to send")
 	anomalyProb := flag.Float64("anomaly-prob", 0.05, "Probability (0.0-1.0) of generating an anomaly")
+	authToken := flag.String("token", "local-dev-token", "Bearer token for gateway authentication")
 	flag.Parse()
 
 	// Connect to gateway
@@ -31,8 +33,8 @@ func main() {
 
 	c := telemetryv1.NewTelemetryServiceClient(conn)
 
-	// Open bidirectional stream
-	ctx := context.Background()
+	// Open bidirectional stream with JWT bearer auth.
+	ctx := metadata.AppendToOutgoingContext(context.Background(), "authorization", "bearer "+*authToken)
 	stream, err := c.StreamTelemetry(ctx)
 	if err != nil {
 		log.Fatalf("could not start stream: %v", err)

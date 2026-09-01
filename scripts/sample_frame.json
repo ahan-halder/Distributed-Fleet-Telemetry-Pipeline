@@ -1,0 +1,23 @@
+{
+  "agent_id": "agent-bench-001",
+  "fleet_id": "fleet-load-test",
+  "collected_at": "2026-06-25T18:00:00Z",
+  "idempotency_key": "bench-uuid-0001",
+  "system": {
+    "cpu_utilization_pct": 52.3,
+    "memory_used_bytes": 4096,
+    "memory_total_bytes": 8192,
+    "disk_io_read_mbps": 12.5,
+    "disk_io_write_mbps": 8.1
+  },
+  "network": {
+    "rx_mbps": 45.2,
+    "tx_mbps": 22.7,
+    "tcp_retransmit_count": 0,
+    "connection_count": 128
+  },
+  "labels": {
+    "region": "us-central1",
+    "env": "benchmark"
+  }
+}

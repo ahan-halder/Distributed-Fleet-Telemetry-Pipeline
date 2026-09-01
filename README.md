@@ -41,6 +41,7 @@
 - [Design Decisions](#design-decisions)
 - [Future Work](#future-work)
 - [Implementation Results](#implementation-results)
+- [Demo & Results Showcase](RESULTS.md)
 
 ---
 
@@ -789,10 +790,15 @@ go run ./cmd/agent \
   --gateway=localhost:50051 \
   --agent-id=agent-local-001 \
   --fleet-id=fleet-dev \
-  --insecure
+  --token=local-dev-token
 ```
 
-**4. Run the full local test suite:**
+**4. Run the full local demo (gateway + REST proxy + agents):**
+```bash
+./scripts/demo.sh
+```
+
+**5. Run the full local test suite:**
 ```bash
 go test ./... -v -race
 ```
