@@ -7,7 +7,7 @@ GATEWAY_URL=${2:-"localhost:50051"}
 echo "Starting $NUM_AGENTS agents connecting to $GATEWAY_URL"
 
 for i in $(seq 1 $NUM_AGENTS); do
-  ./agent -gateway="$GATEWAY_URL" -agent-id="agent-load-$i" -fleet-id="fleet-load-test" &
+  ./agent -gateway="$GATEWAY_URL" -agent-id="agent-load-$i" -fleet-id="fleet-load-test" -token="local-dev-token" &
   echo "Started agent $i"
 done
 

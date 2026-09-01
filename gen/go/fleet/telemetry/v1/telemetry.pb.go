@@ -8,7 +8,6 @@ package telemetryv1
 
 import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
-	_ "google.golang.org/genproto/googleapis/rpc/status"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -774,7 +773,7 @@ var File_v1_telemetry_proto protoreflect.FileDescriptor
 
 const file_v1_telemetry_proto_rawDesc = "" +
 	"\n" +
-	"\x12v1/telemetry.proto\x12\x12fleet.telemetry.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/rpc/status.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa4\x03\n" +
+	"\x12v1/telemetry.proto\x12\x12fleet.telemetry.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa4\x03\n" +
 	"\vMetricFrame\x12\x19\n" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x12\x19\n" +
 	"\bfleet_id\x18\x02 \x01(\tR\afleetId\x12=\n" +
