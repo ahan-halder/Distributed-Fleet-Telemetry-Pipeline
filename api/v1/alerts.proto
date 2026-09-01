@@ -1,8 +1,6 @@
 syntax = "proto3";
 package fleet.telemetry.v1;
 
-import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
 import "v1/telemetry.proto";
 
 option go_package = "github.com/ahan-halder/fleet-telemetry/gen/go/fleet/telemetry/v1;telemetryv1";
